@@ -60,6 +60,9 @@ function s:filetype ()
   elseif l:ft ==# 'javascript'
       let s:comment = "\/\/"
       let s:type = s:comment . " Javascript File"
+  elseif l:ft ==# 'java'
+      let s:comment = "\/\/"
+      let s:type = s:comment . " Java File"
   else
     let s:comment = "#"
     let s:type = s:comment . " Text File"
