@@ -137,7 +137,7 @@ function! s:update ()
 endfunction
 
 
-"autocmd BufNewFile * call s:insert ()
+autocmd BufNewFile * call s:insert ()
 autocmd BufWritePre * call s:update ()
 
 
