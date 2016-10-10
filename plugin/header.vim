@@ -72,8 +72,8 @@ function! s:filetype ()
     let s:type = s:comment . " Text File"
   endif
   unlet s:file
-" ['sh', 'py', 'vim', 'c', 'rst, 'h','php','javascript','java','md', 'markdown', 'pl']
 endfunction
+" ['sh', 'py', 'vim', 'c', 'rst, 'h','php','javascript','java','md', 'markdown', 'pl']
 
 
 " FUNCTION:
@@ -144,6 +144,6 @@ autocmd BufWritePre * call s:update ()
 
 
 " This might not be the best way to do it, but it works for now.
-for g:ext in ['sh', 'py', 'vim', 'c', 'rst, 'h', 'php', 'javascript', 'java', 'md', 'markdown', 'pl']
+for g:ext in ['sh', 'py', 'vim', 'c', 'rst', 'h', 'php', 'javascript', 'java', 'md', 'markdown', 'pl']
   autocmd BufNewFile "*." . g:ext call s:insert ()
 endfor
