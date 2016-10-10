@@ -20,7 +20,7 @@
 " when the file is not a script executable.
 
 
-function s:filetype ()
+function! s:filetype ()
 
   let s:file = expand("<afile>:t")
   let l:ft = &ft
@@ -80,7 +80,7 @@ endfunction
 " created = Date of the file creation.
 " modified = Date of the last modification.
 
-function s:insert ()
+function! s:insert ()
 
   call s:filetype ()
 
@@ -113,7 +113,7 @@ endfunction
 " Update the date of last modification.
 " Check the line number 6 looking for the pattern.
 
-function s:update ()
+function! s:update ()
 
   call s:filetype ()
 
