@@ -41,7 +41,8 @@ function! s:filetype ()
       let s:type = s:comment . "!/usr/bin/env bash"
   elseif l:ft ==# 'python'
       let s:comment = "#"
-      let s:type = s:comment . "-*- coding:utf-8 -*-"
+      "let s:type = s:comment . "-*- coding:utf-8 -*-"
+      let s:type = s:comment . "!/usr/bin/env python"
   elseif l:ft ==# 'perl'
       let s:comment = "#"
       let s:type = s:comment . "!/usr/bin/env perl"
@@ -63,12 +64,15 @@ function! s:filetype ()
   elseif l:ft ==# 'java'
       let s:comment = "\/\/"
       let s:type = s:comment . " Java File"
+  elseif l:ft ==# 'markdown'
+      let s:comment = "#"
+      let s:type = s:comment . " TITLE"
   else
     let s:comment = "#"
     let s:type = s:comment . " Text File"
   endif
   unlet s:file
-
+" ['sh', 'py', 'vim', 'c', 'rst, 'h','php','javascript','java','md', 'markdown', 'pl']
 endfunction
 
 
@@ -133,5 +137,13 @@ function! s:update ()
 endfunction
 
 
-autocmd BufNewFile * call s:insert ()
+"autocmd BufNewFile * call s:insert ()
 autocmd BufWritePre * call s:update ()
+
+
+
+
+" This might not be the best way to do it, but it works for now.
+for g:ext in ['sh', 'py', 'vim', 'c', 'rst, 'h','php','javascript','java','md', 'markdown', 'pl']
+  autocmd BufNewFile "*." . g:ext call s:insert ()
+endfor
