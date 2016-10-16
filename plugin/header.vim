@@ -20,7 +20,7 @@
 " when the file is not a script executable.
 
 
-function s:filetype ()
+function! s:filetype ()
 
   let s:file = expand("<afile>:t")
   let l:ft = &ft
@@ -41,7 +41,8 @@ function s:filetype ()
       let s:type = s:comment . "!/usr/bin/env bash"
   elseif l:ft ==# 'python'
       let s:comment = "#"
-      let s:type = s:comment . "-*- coding:utf-8 -*-"
+      "let s:type = s:comment . "-*- coding:utf-8 -*-"
+      let s:type = s:comment . "!/usr/bin/env python"
   elseif l:ft ==# 'perl'
       let s:comment = "#"
       let s:type = s:comment . "!/usr/bin/env perl"
@@ -60,13 +61,19 @@ function s:filetype ()
   elseif l:ft ==# 'javascript'
       let s:comment = "\/\/"
       let s:type = s:comment . " Javascript File"
+  elseif l:ft ==# 'java'
+      let s:comment = "\/\/"
+      let s:type = s:comment . " Java File"
+  elseif l:ft ==# 'markdown'
+      let s:comment = "#"
+      let s:type = s:comment . " TITLE"
   else
     let s:comment = "#"
     let s:type = s:comment . " Text File"
   endif
   unlet s:file
-
 endfunction
+" ['sh', 'py', 'vim', 'c', 'rst, 'h','php','javascript','java','md', 'markdown', 'pl']
 
 
 " FUNCTION:
@@ -77,7 +84,7 @@ endfunction
 " created = Date of the file creation.
 " modified = Date of the last modification.
 
-function s:insert ()
+function! s:insert ()
 
   call s:filetype ()
 
@@ -110,7 +117,7 @@ endfunction
 " Update the date of last modification.
 " Check the line number 6 looking for the pattern.
 
-function s:update ()
+function! s:update ()
 
   call s:filetype ()
 
@@ -132,3 +139,11 @@ endfunction
 
 autocmd BufNewFile * call s:insert ()
 autocmd BufWritePre * call s:update ()
+
+
+
+
+" This might not be the best way to do it, but it works for now.
+for g:ext in ['sh', 'py', 'vim', 'c', 'rst', 'h', 'php', 'javascript', 'java', 'md', 'markdown', 'pl']
+  autocmd BufNewFile "*." . g:ext call s:insert ()
+endfor
